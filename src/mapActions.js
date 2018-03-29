@@ -1,15 +1,15 @@
-import { send } from './ws'
+import { send } from "./ws"
 
 export const map = (actions = {}, remote = {}, parent = null) => {
   Object.keys(remote).forEach(name => {
     const action = remote[name]
 
-    if (typeof action === 'function') {
-      actions[name + '_done'] = action
+    if (typeof action === "function") {
+      actions[name + "_done"] = action
 
       actions[name] = (state, actions) => data => {
         const key = parent ? `${parent}.${name}` : name
-        const msg = data === null ? [key] : [key, data]
+        const msg = [key, data].filter(e => !!e)
 
         send(msg)
       }
@@ -17,7 +17,7 @@ export const map = (actions = {}, remote = {}, parent = null) => {
       return
     }
 
-    if (typeof action === 'object') {
+    if (typeof action === "object") {
       const remoteActions = map({}, action, name)
       actions[name] = Object.assign({}, actions[name], remoteActions)
       return

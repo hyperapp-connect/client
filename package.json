@@ -1,5 +1,5 @@
 {
-  "name": "hyperconnect-client",
+  "name": "@hyperconnect/client",
   "version": "0.0.1",
   "description": "connect your hyperapp to an action driven websocket/http server",
   "main": "dist/index.js",

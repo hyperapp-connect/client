@@ -65,7 +65,7 @@ const reactions = actions => ({
 
     while (cache.length) {
       const msg = cache.shift()
-      send(msg)
+      ws.send(stringify(msg))
     }
   },
   close: () => {

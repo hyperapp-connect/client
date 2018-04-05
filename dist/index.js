@@ -2,7 +2,7 @@
 
 Object.defineProperty(exports, '__esModule', { value: true });
 
-let ws = {};
+let ws = undefined;
 
 const cache = [];
 let open = false;
@@ -69,7 +69,7 @@ const reactions = actions => ({
 
     while (cache.length) {
       const msg = cache.shift();
-      send(msg);
+      ws.send(stringify(msg));
     }
   },
   close: () => {
@@ -85,9 +85,10 @@ const connect = (actions, options = {}) => {
   apiVersion = options.apiVersion || "v0";
   error = options.error || error;
 
-  ws = new WebSocket(`${protocol}://${host}:${port}`);
-
-  open = false;
+  if (!ws) {
+    ws = new WebSocket(`${protocol}://${host}:${port}`);
+    open = false;
+  }
 
   const react = reactions(actions);
 

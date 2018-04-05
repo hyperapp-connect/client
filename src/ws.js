@@ -1,4 +1,4 @@
-let ws = {}
+let ws = undefined
 
 export const cache = []
 export let open = false
@@ -81,9 +81,10 @@ export const connect = (actions, options = {}) => {
   apiVersion = options.apiVersion || "v0"
   error = options.error || error
 
-  ws = new WebSocket(`${protocol}://${host}:${port}`)
-
-  open = false
+  if (!ws) {
+    ws = new WebSocket(`${protocol}://${host}:${port}`)
+    open = false
+  }
 
   const react = reactions(actions)
 

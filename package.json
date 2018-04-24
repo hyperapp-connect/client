@@ -2,19 +2,14 @@
   "name": "@hyperconnect/client",
   "version": "0.0.1",
   "description": "connect your hyperapp to an action driven websocket/http server",
-  "main": "dist/index.js",
-  "jsnext:main": "src/index.js",
+  "main": "src/index.js",
   "author": "Jascha Ehrenreich <jascha@jaeh.at>",
   "license": "MIT",
   "scripts": {
-    "format": "prettier --write '{src,test}/**/*.js'",
-    "format:check": "prettier --list-different 'src/*.js'",
-    "bundle": "rollup -i src/index.js -o dist/index.js -m -f cjs -n hyperconnectclient",
-    "check": "npm run format:check && npm t",
-    "build": "npm run format:check && npm test",
-    "prepare": "npm run build",
-    "test": "npm run bundle && VERBOSE=true nyc -n ./dist node ./test",
-    "release": "npm run clean && npm i && git commit -am $npm_package_version && git tag $npm_package_version && git push && git push --tags && npm publish"
+    "start": "t -p",
+    "test": "t",
+    "format": "f -w",
+    "format:check": "f"
   },
   "files": [
     "src/**",
@@ -25,8 +20,9 @@
   },
   "devDependencies": {
     "@magic/test": "github:magic/test",
-    "nyc": "11.6.0",
-    "prettier": "1.11.1",
-    "rollup": "0.57.1"
+    "rollup": "0.58.2"
+  },
+  "peerDependencies": {
+    "hyperapp": "1.2.5"
   }
 }

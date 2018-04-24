@@ -4,18 +4,38 @@ const local = {
   local: () => () => {},
   counter: {
     up: () => () => {}
+  },
+  deep: {
+    nested: {
+      object: () => () => {}
+    }
   }
 }
 
 const remote = {
   counter: {
     up2: () => () => {}
+  },
+  deep: {
+    nested: {
+      remoted: {
+        object: () => () => {}
+      }
+    }
   }
 }
 
-const fns = [
+module.exports = [
   { fn: () => mapActions({}, {}), expect: e => typeof e === "object" },
   { fn: () => mapActions(local, remote), expect: e => typeof e === "object" },
+  {
+    fn: () => mapActions(local, remote),
+    expect: e => typeof e.deep.nested.object === "function"
+  },
+  {
+    fn: () => mapActions(local, remote),
+    expect: e => typeof e.deep.nested.remoted.object === "function"
+  },
   {
     fn: () => mapActions(local, remote),
     expect: e => typeof e.local === "function"
@@ -37,5 +57,3 @@ const fns = [
     expect: e => typeof e.counter.up_done === "undefined"
   }
 ]
-
-module.exports = fns

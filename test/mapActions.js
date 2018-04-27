@@ -1,59 +1,59 @@
-const { mapActions } = require("../dist/index.js")
+const { mapActions } = require('../dist/index.js')
 
 const local = {
   local: () => () => {},
   counter: {
-    up: () => () => {}
+    up: () => () => {},
   },
   deep: {
     nested: {
-      object: () => () => {}
-    }
-  }
+      object: () => () => {},
+    },
+  },
 }
 
 const remote = {
   counter: {
-    up2: () => () => {}
+    up2: () => () => {},
   },
   deep: {
     nested: {
       remoted: {
-        object: () => () => {}
-      }
-    }
-  }
+        object: () => () => {},
+      },
+    },
+  },
 }
 
 module.exports = [
-  { fn: () => mapActions({}, {}), expect: e => typeof e === "object" },
-  { fn: () => mapActions(local, remote), expect: e => typeof e === "object" },
+  { fn: () => mapActions({}, {}), expect: e => typeof e === 'object' },
+  { fn: () => mapActions(local, remote), expect: e => typeof e === 'object' },
   {
     fn: () => mapActions(local, remote),
-    expect: e => typeof e.deep.nested.object === "function"
+    expect: e => typeof e.deep.nested.object === 'function',
   },
   {
     fn: () => mapActions(local, remote),
-    expect: e => typeof e.deep.nested.remoted.object === "function"
+    expect: e => typeof e.deep.nested.remoted.object === 'function',
   },
   {
     fn: () => mapActions(local, remote),
-    expect: e => typeof e.local === "function"
+    expect: e => typeof e.local === 'function',
   },
   {
     fn: () => mapActions(local, remote),
-    expect: e => typeof e.counter.up2 === "function"
+    expect: e => typeof e.counter.up2 === 'function',
   },
   {
     fn: () => mapActions(local, remote),
-    expect: e => typeof e.counter.up2_done === "function"
+    expect: e => typeof e.counter.up2_done === 'function',
   },
   {
     fn: () => mapActions(local, remote),
-    expect: e => typeof e.counter.up === "function"
+    expect: e => typeof e.counter.up === 'function',
   },
   {
     fn: () => mapActions(local, remote),
-    expect: e => typeof e.counter.up_done === "undefined"
-  }
+    expect: e => typeof e.counter.up_done === 'undefined',
+  },
 ]

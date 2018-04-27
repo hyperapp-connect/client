@@ -1,5 +1,5 @@
 import error from './error'
-const isString = o => typeof o === "string"
+const isString = o => typeof o === 'string'
 
 export const parse = msg => {
   if (!isString(msg)) {

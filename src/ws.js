@@ -77,8 +77,8 @@ export const connect = (actions, options = {}) => {
   const port = options.port || location.port
   const protocol = options.protocol || "ws"
 
-  apiVersion = options.apiVersion || "v0"
-  
+  apiVersion = options.apiVersion || apiVersion || "v0"
+
   createSocket(`${protocol}://${host}:${port}`, actions)
 
   return ws
@@ -86,6 +86,9 @@ export const connect = (actions, options = {}) => {
 
 export const send = msg => {
   if (open && ws) {
+    if (typeof msg[0] === 'string') {
+      msg[0] = `${apiVersion}.${msg[0]}`
+    }
     ws.send(stringify(msg))
   } else {
     cache.push(msg)

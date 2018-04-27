@@ -19,8 +19,6 @@ export const stringify = msg => {
       msg = JSON.parse(msg)
     }
 
-    msg[0] = `${apiVersion}.${msg[0]}`
-
     return JSON.stringify(msg)
   } catch (e) {
     error(e)

@@ -10,32 +10,6 @@ let error = (...msg) => console.error(...msg)
 
 const isFunction = o => typeof o === "function"
 
-const stringify = msg => {
-  try {
-    if (isString(msg)) {
-      msg = JSON.parse(msg)
-    }
-
-    msg[0] = `${apiVersion}.${msg[0]}`
-
-    return JSON.stringify(msg)
-  } catch (e) {
-    error(e)
-  }
-}
-
-const parse = msg => {
-  if (!isString(msg)) {
-    return msg
-  }
-
-  try {
-    return JSON.parse(msg)
-  } catch (e) {
-    return msg
-  }
-}
-
 const reactions = {
   onmessage: actions => e => {
     if (e.data === "Unknown Action") {

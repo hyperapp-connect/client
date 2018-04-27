@@ -8,7 +8,11 @@ export const map = (actions = {}, remote = {}, parent = null) => {
     if (typeof action === "function") {
       actions[name + "_done"] = action
 
-      actions[name] = data => {
+      actions[name] = data => (state = {}) => {
+        if (state.jwt) {
+          data.jwt = state.jwt
+        }
+        
         const msg = [key, data]
         send(msg)
       }

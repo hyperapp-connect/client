@@ -78,8 +78,7 @@ export const connect = (actions, options = {}) => {
   const protocol = options.protocol || "ws"
 
   apiVersion = options.apiVersion || "v0"
-  error = options.error || error
-
+  
   createSocket(`${protocol}://${host}:${port}`, actions)
 
   return ws

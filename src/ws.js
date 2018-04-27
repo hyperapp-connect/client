@@ -1,12 +1,11 @@
 import { stringify, parse } from './json'
+import error from './error'
 
 let ws = undefined
 
 export const cache = []
 export let open = false
 export let apiVersion = "v0"
-
-let error = (...msg) => console.error(...msg)
 
 const isFunction = o => typeof o === "function"
 

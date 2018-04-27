@@ -1,3 +1,4 @@
+import error from './error'
 const isString = o => typeof o === "string"
 
 export const parse = msg => {

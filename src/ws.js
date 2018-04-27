@@ -1,3 +1,5 @@
+import { stringify, parse } from './json'
+
 let ws = undefined
 
 export const cache = []
@@ -6,7 +8,6 @@ export let apiVersion = "v0"
 
 let error = (...msg) => console.error(...msg)
 
-const isString = o => typeof o === "string"
 const isFunction = o => typeof o === "function"
 
 const stringify = msg => {
@@ -35,8 +36,8 @@ const parse = msg => {
   }
 }
 
-const reactions = actions => ({
-  onmessage: e => {
+const reactions = {
+  onmessage: actions => e => {
     if (e.data === "Unknown Action") {
       error("Unknown Action", e)
       return
@@ -67,10 +68,36 @@ const reactions = actions => ({
       ws.send(stringify(msg))
     }
   },
-  close: () => {
-    open = false
+}
+
+const retryConnect = (url, actions, wait = 1000) => new Promise(resolve => {
+  if (open && ws) {
+    return ws
   }
+
+  wait += 500
+  setTimeout(() => {
+    createSocket(url, actions)
+    resolve()
+  }, wait)
 })
+
+const createSocket = (url, actions) => {
+  open = false
+  try {
+    ws = new WebSocket(url)
+  } catch (e) {
+    // implement client error logging actions
+  }
+
+  ws.onopen = reactions.open
+  ws.onmessage = reactions.onmessage(actions)
+
+  ws.onclose = () => {
+    open = false
+    retryConnect(url, actions)
+  }
+}
 
 export const connect = (actions, options = {}) => {
   const host = options.host || location.hostname
@@ -80,22 +107,13 @@ export const connect = (actions, options = {}) => {
   apiVersion = options.apiVersion || "v0"
   error = options.error || error
 
-  if (!ws) {
-    ws = new WebSocket(`${protocol}://${host}:${port}`)
-    open = false
-  }
-
-  const react = reactions(actions)
-
-  ws.onopen = react.open
-  ws.onclose = react.close
-  ws.onmessage = react.onmessage
+  createSocket(`${protocol}://${host}:${port}`, actions)
 
   return ws
 }
 
 export const send = msg => {
-  if (open) {
+  if (open && ws) {
     ws.send(stringify(msg))
   } else {
     cache.push(msg)

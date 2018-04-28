@@ -1,6 +1,6 @@
 import { send } from './ws'
 
-export const map = (actions = {}, remote = {}, parent = null) => {
+export const mapActions = (actions = {}, remote = {}, parent = null) => {
   Object.keys(remote).forEach(name => {
     const action = remote[name]
     const key = parent ? `${parent}.${name}` : name
@@ -21,7 +21,7 @@ export const map = (actions = {}, remote = {}, parent = null) => {
     }
 
     if (typeof action === 'object') {
-      actions[name] = map(actions[name], action, key)
+      actions[name] = mapActions(actions[name], action, key)
       return
     }
   })
@@ -29,4 +29,4 @@ export const map = (actions = {}, remote = {}, parent = null) => {
   return actions
 }
 
-export default map
+export default mapActions

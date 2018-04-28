@@ -1,5 +1,5 @@
 export { mapActions } from './mapActions'
-export * as connect from './ws'
+export { * as ws } from './ws'
 export { actions } from './actions'
 export { state } from './state'
 

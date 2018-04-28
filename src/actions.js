@@ -2,10 +2,10 @@ export const actions = {
   checkLogin: (state, actions, reverse = false) => (...args) => {
     if (!reverse) {
       if (state.user.jwt) {
-        actions.location.go(state.loginRedirect)
+        actions.location.go(state.auth.redirect.login)
       }
     } else if (!state.user.jwt) {
-      actions.location.go(state.logoutRedirect)
+      actions.location.go(state.auth.redirect.logout)
     }
   }
 }

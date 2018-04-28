@@ -1,6 +1,10 @@
 export const state = {
-  logoutRedirect: '/login',
-  loginRedirect: '/profile',
+  auth: {
+    redirect: {
+      logout: '/login',
+      login: '/profile',
+    },
+  },
 }
 
 export default state

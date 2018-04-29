@@ -1,13 +1,14 @@
 export const actions = {
-  checkLogin: (state, actions, reverse = false) => (...args) => {
-    if (!reverse) {
-      if (state.user.jwt) {
-        actions.location.go(state.auth.redirect.login)
-      }
-    } else if (!state.user.jwt) {
+  viewIfUser: () => (state, actions) => {
+    if (!state.user.jwt) {
       actions.location.go(state.auth.redirect.logout)
     }
-  }
+  },
+  viewIfNoUser: () => (state, actions) => {
+    if (state.user.jwt) {
+      actions.location.go(state.auth.redirect.login)
+    }
+  },
 }
 
 export default actions

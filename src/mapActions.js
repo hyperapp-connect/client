@@ -6,7 +6,15 @@ export const mapActions = (actions = {}, remote = {}, parent = null) => {
     const key = parent ? `${parent}.${name}` : name
 
     if (typeof action === 'function') {
-      actions[name + '_done'] = action
+      actions[name + '_done'] = (res) => (state, actions) => {
+        if (!res.ok) {
+          return {
+            errors: res.errors || [res.error],
+          }
+        }
+
+        return action(res)(state, actions)
+      }
 
       actions[name] = data => (state = {}) => {
         if (state.jwt) {

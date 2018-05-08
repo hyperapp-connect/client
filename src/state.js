@@ -5,6 +5,7 @@ export const state = {
       login: '/profile',
     },
   },
+  messages: [],
 }
 
 export default state

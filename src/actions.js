@@ -1,11 +1,11 @@
 export const actions = {
   viewIfUser: () => (state, actions) => {
-    if (!state.user.jwt) {
+    if (!state.jwt) {
       actions.location.go(state.auth.redirect.logout)
     }
   },
   viewIfNoUser: () => (state, actions) => {
-    if (state.user.jwt) {
+    if (state.jwt) {
       actions.location.go(state.auth.redirect.login)
     }
   },

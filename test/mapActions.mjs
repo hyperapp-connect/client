@@ -1,4 +1,4 @@
-const { mapActions } = require('../dist/index.js')
+import { mapActions } from '../src/mapActions'
 
 const local = {
   local: () => () => {},
@@ -25,7 +25,7 @@ const remote = {
   },
 }
 
-module.exports = [
+export default [
   { fn: () => mapActions({}, {}), expect: e => typeof e === 'object' },
   { fn: () => mapActions(local, remote), expect: e => typeof e === 'object' },
   {

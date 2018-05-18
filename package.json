@@ -1,8 +1,8 @@
 {
-  "name": "@hyperconnect/client",
+  "name": "@hypercnt/client",
   "version": "0.0.1",
   "description": "connect your hyperapp to an action driven websocket/http server",
-  "main": "src/index.js",
+  "main": "src/index.mjs",
   "author": "Jascha Ehrenreich <jascha@jaeh.at>",
   "license": "MIT",
   "scripts": {
@@ -12,15 +12,13 @@
     "format:check": "f"
   },
   "files": [
-    "src/**",
-    "dist/**"
+    "src/**"
   ],
   "prettier": {
     "semi": false
   },
   "devDependencies": {
-    "@magic/test": "github:magic/test",
-    "rollup": "0.58.2"
+    "@magic/test": "github:magic/test#mjs"
   },
   "peerDependencies": {
     "hyperapp": "1.2.5"

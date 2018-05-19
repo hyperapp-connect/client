@@ -33,6 +33,10 @@ export const mapActions = (actions = {}, remote = {}, parent = null) => {
     }
   })
 
+  if (!actions.socketServerConnect) {
+    actions.socketServerConnect = t => () => ({ connected: t })
+  }
+
   return actions
 }
 

@@ -60,8 +60,10 @@ const createSocket = (url, actions) => {
   open = false
   try {
     ws = new WebSocket(url)
+    actions.socketServerConnect(true)
   } catch (e) {
-    // implement client error logging actions
+    // implement client error logging actions if websocket can not open
+    console.error('websocket reconnect failed')
   }
 
   ws.onopen = reactions.open
@@ -69,6 +71,7 @@ const createSocket = (url, actions) => {
 
   ws.onclose = () => {
     open = false
+    actions.socketServerConnect(false)
     retryConnect(url, actions)
   }
 }

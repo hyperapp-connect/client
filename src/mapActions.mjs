@@ -7,12 +7,11 @@ export const mapActions = (actions = {}, remote = {}, parent = null) => {
 
     if (typeof action === 'function') {
       actions[name + '_done'] = (res) => (state, actions) => {
-        if (!res.ok && typeof res === 'undefined') {
+        if (res.errors || res.error) {
           return {
             errors: res.errors || [res.error],
           }
         }
-
         return action(res)(state, actions)
       }
 

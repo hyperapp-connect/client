@@ -89,10 +89,11 @@ export const connect = (actions, options = {}) => {
 }
 
 export const send = msg => {
+  if (typeof msg[0] === 'string') {
+    msg[0] = `${apiVersion}.${msg[0]}`
+  }
+  
   if (open && ws) {
-    if (typeof msg[0] === 'string') {
-      msg[0] = `${apiVersion}.${msg[0]}`
-    }
     ws.send(stringify(msg))
   } else {
     cache.push(msg)

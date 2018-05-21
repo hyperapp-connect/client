@@ -9,6 +9,7 @@ export const parse = msg => {
   try {
     return JSON.parse(msg)
   } catch (e) {
+    error(e)
     return msg
   }
 }
@@ -16,16 +17,19 @@ export const parse = msg => {
 export const stringify = msg => {
   try {
     if (isString(msg)) {
-      msg = JSON.parse(msg)
+      return msg
     }
 
     return JSON.stringify(msg)
   } catch (e) {
     error(e)
+    return msg
   }
 }
 
-export default {
+export const json = {
   parse,
   stringify,
 }
+
+export default json

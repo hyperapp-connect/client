@@ -18,9 +18,13 @@
     "semi": false
   },
   "devDependencies": {
-    "@magic/test": "github:magic/test#mjs"
+    "@magic/test": "github:magic/test#mjs",
+    "jsdom": "11.10.0"
   },
   "peerDependencies": {
+    "hyperapp": "1.2.5"
+  },
+  "dependencies": {
     "hyperapp": "1.2.5"
   }
 }

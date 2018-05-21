@@ -8,3 +8,10 @@ export { mapActions } from './mapActions'
 
 // context
 export { withContext, nestable, processor } from './context'
+
+// router
+export { Link } from "./Link"
+export { Route } from "./Route"
+export { Switch } from "./Switch"
+export { Redirect } from "./Redirect"
+export { location } from "./location"

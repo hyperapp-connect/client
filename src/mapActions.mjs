@@ -1,5 +1,6 @@
 import { send } from './ws'
 import { router } from './router'
+import { store } from './store'
 
 export const mapActions = (actions = {}, remote = {}, parent = null) => {
   Object.keys(remote).forEach(name => {
@@ -48,7 +49,10 @@ export const mapActions = (actions = {}, remote = {}, parent = null) => {
     }
   }
 
-  // actions.go = router.actions.go
+  actions.router = router.actions
+
+  actions.hydrate = store.hydrate
+  actions.saveState = store.save
 
   return actions
 }

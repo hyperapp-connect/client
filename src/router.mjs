@@ -11,16 +11,18 @@ export const state = {
 }
 
 export const actions = {
-  go: props => state => {
-    const { location } = state
+  go: ({ to, e }) => state => {
+    e.preventDefault()
 
+    const { location } = state
+    
     if (typeof history !== 'undefined') {
-      history.pushState(location.pathname, '', props.to)
+      history.pushState(location.pathname, '', to)
     }
 
     return {
       location: {
-        pathname: props.to,
+        pathname: to,
         previous: location.pathname,
       },
     }

@@ -1,4 +1,4 @@
 import { h } from '../app'
 
-export const Link = (props, children) => (_, actions) =>
-  <a onclick={actions.go(props.href || props.to)}>{children}</a>
+export const Link = ({ to }, children) => (_, actions) =>
+  <a onclick={e => actions.go({ e, to })} href={to}>{children || to}</a>

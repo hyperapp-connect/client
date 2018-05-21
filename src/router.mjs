@@ -1,31 +1,29 @@
+// @hypercnt/client/router
+
+// get the origin, working in ie and safari
 export const getOrigin = loc =>
   loc.protocol + '//' + loc.hostname + (loc.port ? ':' + loc.port : '')
 
-export const isExternal = anchorElement => getOrigin(location) !== getOrigin(anchorElement)
+// is link an external link?
+export const isExternal = href => getOrigin(location) !== getOrigin(href)
 
 const pathname = typeof location !== 'undefined' ? location.pathname : '/'
 export const state = {
-  location: {
-    pathname,
-    previous: pathname,
-  },
+  pathname,
+  previous: pathname,
 }
 
 export const actions = {
-  go: ({ to, e }) => state => {
+  go: ({ e, to }) => state => {
     e.preventDefault()
 
-    const { location } = state
-
     if (typeof history !== 'undefined') {
-      history.pushState(location.pathname, '', to)
+      history.pushState(state.pathname, '', to)
     }
 
     return {
-      location: {
-        pathname: to,
-        previous: location.pathname,
-      },
+      pathname: to,
+      previous: state.pathname,
     }
   },
 }

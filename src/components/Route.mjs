@@ -1,7 +1,7 @@
 import { h } from '../app'
 
 export const Route = (props, children) => (state, actions) => {
-  const { pathname } = state.location
+  const { pathname } = state.router
   const { path } = props
 
   if (props.exact && pathname !== path) {

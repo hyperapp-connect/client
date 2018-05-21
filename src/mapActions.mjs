@@ -1,4 +1,5 @@
 import { send } from './ws'
+import { router } from './router'
 
 export const mapActions = (actions = {}, remote = {}, parent = null) => {
   Object.keys(remote).forEach(name => {
@@ -6,7 +7,7 @@ export const mapActions = (actions = {}, remote = {}, parent = null) => {
     const key = parent ? `${parent}.${name}` : name
 
     if (typeof action === 'function') {
-      actions[name + '_done'] = res => (state, actions) => {
+      actions[name + '_done'] = (res) => (state, actions) => {
         if (!res.ok || !res.hasOwnProperty('data')) {
           if (!res.errors && !res.error) {
             res = {
@@ -39,9 +40,15 @@ export const mapActions = (actions = {}, remote = {}, parent = null) => {
     }
   })
 
-  if (!actions.socketServerConnect) {
-    actions.socketServerConnect = t => () => ({ connected: t })
+  actions.socketServerConnect = t => () => {
+    if (actions.socketServerConnect) {
+      return actions.socketServerConnect({ connected: t })
+    } else {
+      return { connected: t }
+    }
   }
+
+  // actions.go = router.actions.go
 
   return actions
 }

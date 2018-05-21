@@ -92,7 +92,6 @@ export const send = msg => {
   if (typeof msg[0] === 'string') {
     msg[0] = `${apiVersion}.${msg[0]}`
   }
-
   if (open && ws) {
     ws.send(stringify(msg))
   } else {

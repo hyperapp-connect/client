@@ -1,9 +1,5 @@
-import hyper from 'hyperapp'
-import { withContext } from './context/with'
+import { app as _app } from 'hyperapp'
 
-export const app = hyper.app
-export const h = hyper.h
+export const app = _app
 
-export const appWithContext = withContext(app)
-
-export default appWithContext
+export default app

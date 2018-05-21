@@ -3,10 +3,11 @@ export const getOrigin = loc =>
 
 export const isExternal = anchorElement => getOrigin(location) !== getOrigin(anchorElement)
 
+const pathname = typeof location !== 'undefined' ? location.pathname : '/'
 export const state = {
   location: {
-    pathname: '/',
-    previous: '/',
+    pathname,
+    previous: pathname,
   },
 }
 
@@ -15,7 +16,7 @@ export const actions = {
     e.preventDefault()
 
     const { location } = state
-    
+
     if (typeof history !== 'undefined') {
       history.pushState(location.pathname, '', to)
     }

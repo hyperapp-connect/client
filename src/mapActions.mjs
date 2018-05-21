@@ -6,7 +6,7 @@ export const mapActions = (actions = {}, remote = {}, parent = null) => {
     const key = parent ? `${parent}.${name}` : name
 
     if (typeof action === 'function') {
-      actions[name + '_done'] = (res) => (state, actions) => {
+      actions[name + '_done'] = res => (state, actions) => {
         if (!res.ok || !res.hasOwnProperty('data')) {
           if (!res.errors && !res.error) {
             res = {

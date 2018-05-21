@@ -4,7 +4,7 @@ export { actions } from './actions'
 export { state } from './state'
 export { router } from './router'
 
-export { * as components } from './components'
+export * from './components'
 
 import { app as _app } from './app'
 

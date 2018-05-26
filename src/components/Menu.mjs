@@ -9,11 +9,11 @@ export const MenuItem = ({ to, text }) => (
 
 export const MenuItems = ({ items }) => <ul>{items.map(MenuItem)}</ul>
 
-export const Menu = ({ name }) => (state) => (
-  state.menu[name].length > 0 &&
-  <nav class={`Menu ${name}`}>
-    <MenuItems items={state.menu[name]} />
-  </nav>
-)
+export const Menu = ({ name }) => state =>
+  state.menu[name].length > 0 && (
+    <nav class={`Menu ${name}`}>
+      <MenuItems items={state.menu[name]} />
+    </nav>
+  )
 
 export default Menu

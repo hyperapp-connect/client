@@ -1,4 +1,3 @@
-export const mapState = (local = {}, remote = {}, parent = null ) => {
-
+export const mapState = (local = {}, remote = {}, parent = null) => {
   return local
 }

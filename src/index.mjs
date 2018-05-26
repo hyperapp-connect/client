@@ -1,4 +1,4 @@
-export { mapActions } from './mapActions'
+export { mapActions } from './lib/mapActions'
 export { connect, send } from './ws'
 export { router } from './router'
 

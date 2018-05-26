@@ -35,13 +35,15 @@ const mergeArray = (a1, a2) => {
   return longest.map((val, idx) => createState(a1[idx], a2[idx]))
 }
 
-const mergeObject = (o1, o2) => {
+const mergeObject = (o1, o2, exclude) => {
   const merged = { ...o1, ...o2 }
   const keys = Object.keys(merged)
 
   const o = {}
   Object.entries(merged).map(([key, val]) => {
-    if (!o1.hasOwnProperty(key)) {
+    if (exclude.indexOf(key) > -1) {
+      o[key] = o1[key]
+    } else if (!o1.hasOwnProperty(key)) {
       o[key] = o2[key]
     } else if (!o2.hasOwnProperty(key)) {
       o[key] = o1[key]
@@ -63,7 +65,7 @@ const mergeObject = (o1, o2) => {
   return o
 }
 
-const createState = (state, old) => {
+const createState = (state, old, exclude = []) => {
   old = typeof old !== 'undefined' ? old : load()
 
   if (typeof state === 'undefined') {
@@ -79,7 +81,7 @@ const createState = (state, old) => {
   } else if (typeof state.getTime === 'function') {
     return state.getTime()
   } else if (typeof state === 'object') {
-    return mergeObject(state, old)
+    return mergeObject(state, old, exclude)
   } else {
     return state
   }

@@ -1,4 +1,4 @@
-import { mapActions } from '../src/mapActions'
+import { mapActions } from '../../src/lib/mapActions'
 
 const local = {
   local: () => () => {},

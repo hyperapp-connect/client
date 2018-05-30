@@ -1,3 +1,6 @@
 export { Link } from './Link'
 export { Menu } from './Menu'
 export { Route } from './Route'
+export { Routes } from './Routes'
+export { Header } from './Header'
+export { Main } from './Main'

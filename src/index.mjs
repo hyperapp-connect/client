@@ -1,12 +1,5 @@
-export { mapActions } from './lib/mapActions'
-export { connect, send } from './ws'
-export { router } from './router'
-
-export { json } from './json'
+export { mapActions, connect, send, router, json, render } from './lib'
 
 export * from './components'
 
-import { app as _app } from './app'
-
-export const app = _app
-export default _app
+export { app, h } from './app'

@@ -7,6 +7,8 @@ export const Main = ({ pages, menu, footer }, children) => (state, actions) => (
     <Header menu={menu} logo={state.logo} />
 
     <Routes pages={pages} />
+
+    {children}
   </main>
 )
 

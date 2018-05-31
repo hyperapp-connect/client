@@ -9,8 +9,16 @@ export const mapActions = (actions = {}, remote = {}, parent = null) => {
 
     if (typeof action === 'function') {
       actions[name + '_done'] = res => (state, actions) => {
-        const errors = res.errors && res.errors.length ? res.errors : [res.error]
-        if (errors) {
+        let { error, errors } = res
+        if (errors && errors.length) {
+          if (error) {
+            errors.push(error)
+          }
+        } else if (!errors && error) {
+          errors = [error]
+        }
+
+        if (errors && errors.length) {
           return {
             errors
           }

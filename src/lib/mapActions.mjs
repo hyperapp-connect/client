@@ -2,7 +2,9 @@ import { send } from './ws'
 import { router } from './router'
 import { store } from './store'
 
-export const mapActions = (actions = {}, remote = {}, parent = null) => {
+export const mapActions = (actions = {}, remote = {}, props = {}) => {
+  const { parent, store: doStore } = props
+
   Object.keys(remote).forEach(name => {
     const action = remote[name]
     const key = parent ? `${parent}.${name}` : name
@@ -40,7 +42,7 @@ export const mapActions = (actions = {}, remote = {}, parent = null) => {
     }
 
     if (typeof action === 'object') {
-      actions[name] = mapActions(actions[name], action, key)
+      actions[name] = mapActions(actions[name], action, { ...props, parent: key })
       return
     }
   })

@@ -9,17 +9,13 @@ export const mapActions = (actions = {}, remote = {}, parent = null) => {
 
     if (typeof action === 'function') {
       actions[name + '_done'] = res => (state, actions) => {
-        if (!res.ok && !res.hasOwnProperty('data')) {
-          if (!res.errors && !res.error) {
-            res = {
-              error: 'Unknown Error',
-              res,
-            }
-          }
+        const errors = res.errors && res.errors.length ? res.errors : [res.error]
+        if (errors) {
           return {
-            errors: res.errors || [res.error],
+            errors
           }
         }
+
         return action(res)(state, actions)
       }
 

@@ -1,4 +1,4 @@
-export { mapActions, connect, send, router, json, render } from './lib'
+export { mapActions, connect, send, router, json } from './lib'
 
 export * from './components'
 

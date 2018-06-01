@@ -1,18 +1,16 @@
 import { h } from '../app'
 
 import { Menu } from './Menu'
-import { Routes } from './Routes'
 
 const Logo = ({ logo }) => (
   <img src={ logo.src } alt={logo.alt || logo.title} href={logo.href} />
 )
 
-export const Header = ({ menu, pages, logo }) => (
+export const Header = ({ menu, pages, logo, header }) => state => (
   <header class="main">
     { logo && <Logo logo={logo} /> }
-    <Menu name={menu} />
-
-    <Routes pages={pages} />
+    { state.menu.header && <Menu name="header" collapse={400} /> }
+    { header }
   </header>
 )
 

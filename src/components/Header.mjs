@@ -9,7 +9,7 @@ const Logo = ({ logo }) => (
 export const Header = ({ menu, pages, logo, header }) => state => (
   <header class="main">
     { logo && <Logo logo={logo} /> }
-    { state.menu.header && <Menu name="header" collapse={400} /> }
+    { state.menu.header && <Menu name="header" collapse={600} /> }
     { header }
   </header>
 )

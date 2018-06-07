@@ -24,9 +24,10 @@ const classGen = (state, name, collapse) => {
 }
 
 export const Menu = ({ name, collapse }) => (state, actions) => (
+  name && state.menu[name] && 
   <nav class={`Menu ${name}${classGen(state, name, collapse)}`}>
-    <div onclick={() => actions.menu.toggle(name)}>collapse</div>
-    { state.menu.collapsed && !state.menu.collapsed[name] && <MenuItems items={state.menu[name]} /> }
+    <MenuItems items={state.menu[name]} />
+    <div class="toggle" onclick={() => actions.menu.toggle(name)}>collapse</div>
   </nav>
 )
 
